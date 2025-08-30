@@ -18,26 +18,7 @@ Before diving into code, let's understand why we need multiple layers of verific
 
 **Key principle:** Never trust the frontend for payment confirmation. The backend + Razorpay webhook is the bank vault of your system.
 
-### What We're Building & Why
-
-Imagine you're running a Netflix-like subscription service. Here's what happens and **why each step matters**:
-
-1. User clicks "Subscribe" → We create a subscription order in our database
-   - *Why?* To track who wants to pay and prevent duplicate charges
-
-2. Razorpay popup appears → User enters payment details
-   - *Why?* Secure payment processing without handling sensitive card data
-
-3. Payment verification → We double-check if payment is genuine
-   - Why? Frontend responses can be faked by hackers
-
-4. Webhook confirmation → Razorpay tells us "money received"
-   - Why? Even if our server verification fails, webhook ensures accuracy
-
-5. Database updates → User gets premium access
-   - *Why?* Only after 100% confirmation should we grant access
 ## Why Both /verify Route AND Webhook? (The Most Asked Question!)
-
 Many developers wonder: "Can't we just use webhooks and skip the `/verify` route?" Here's why you need **both**:
 
 #### The /verify Route: Immediate User Experience
